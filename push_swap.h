@@ -5,7 +5,8 @@
 # include <stdio.h> //debug
 # include "ft_printf.h"
 
-# define SIG_ERROR 1
-# define SIG_INVALID_INPUT 2
+# define EXIT_INVALID_INPUT 2
 
+void swap(int **stack, int len);
+void push(int **a, int **b, int len);
 #endif
