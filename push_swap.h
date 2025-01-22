@@ -7,6 +7,10 @@
 
 # define EXIT_INVALID_INPUT 2
 
-void swap(int **stack, int len);
-void push(int **a, int **b, int len);
+int	swap(t_list **stack);
+int	push(t_list **to, t_list **from);
+void rotate(t_list **stack);
+void rrotate(t_list **stack);
+void operations(t_list **a, t_list **b, int min_idx, int *size);
+void _print(t_list *a, t_list *b);
 #endif
