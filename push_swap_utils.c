@@ -12,6 +12,12 @@ int	swap(t_list **stack)
 	return (1);
 }
 
+void	do_swap(t_list **stack, char *action)
+{
+	if (swap(stack))
+		ft_printf("%s", action);
+}
+
 int	push(t_list **to, t_list **from)
 {
 	t_list *ptr;
@@ -23,6 +29,12 @@ int	push(t_list **to, t_list **from)
 	ft_lstadd_front(to, *from);
 	*from = ptr;
 	return (1);
+}
+
+void	do_push(t_list **to, t_list **from, char *action)
+{
+	if (push(to, from))
+		ft_printf("%s\n", action);
 }
 
 void rotate(t_list **stack)
@@ -37,6 +49,12 @@ void rotate(t_list **stack)
 	*stack = ptr;
 }
 
+void	do_rotate(t_list **stack, char *action)
+{
+	rotate(stack);
+	ft_printf("%s", action);
+}
+
 void rrotate(t_list **stack)
 {
 	t_list	*ptr;
@@ -48,4 +66,10 @@ void rrotate(t_list **stack)
 		ptr = ptr->next;
 	ft_lstadd_front(stack, ptr->next);
 	ptr->next = NULL;
+}
+
+void	do_rrotate(t_list **stack, char *action)
+{
+	rrotate(stack);
+	ft_printf("%s", action);
 }
