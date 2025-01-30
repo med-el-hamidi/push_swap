@@ -9,6 +9,7 @@ void	ft_lstclear(t_list **lst)
 	while (*lst != NULL)
 	{
 		tmp = (*lst)->next;
+		(*lst)->nbr = 0;
 		free(*lst);
 		*lst = tmp;
 	}

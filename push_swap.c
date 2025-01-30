@@ -2,7 +2,8 @@
 
 static void	handle_input(int ac, char **av);
 static void	handle_occurence(t_list *a);
-static void	stackSort(t_list **a, t_list **b, int size);
+//static void	sort_stack(t_list **a, t_list **b, int size_a, int size_b);
+static void	sort_stack(t_list **a);
 static void	error_msg(void );
 
 static void	_f(void )
@@ -38,7 +39,6 @@ void _print(t_list *a, t_list *b)
 int	main(int argc, char *argv[])
 {
 	t_list	*a;
-	t_list	*b;
 	t_list	*node;
 	int	i;
 
@@ -62,12 +62,10 @@ int	main(int argc, char *argv[])
 		ft_lstadd_back(&a, node);
 	}
 	handle_occurence(a);
-	b = NULL;
-	_print(a, b);
-	stackSort(&a, &b,argc-1);
-	_print(a, b);
+	//sort_stack(&a, &b, argc-1, 0);
+	if (!is_sorted(a))
+		sort_stack(&a);
 	ft_lstclear(&a);
-	_print(a, b);
 	atexit(_f);
 	return (EXIT_SUCCESS);
 }
@@ -151,10 +149,32 @@ static void	handle_occurence(t_list *a)
 	}
 }
 
-// Divide the array into two subarrays, sort them and merge them
-static void	stackSort(t_list **a, t_list **b, int size);
+static void sort_stack(t_list **a)
 {
-	
+	t_list	*b;
+	int		i;
+
+	b = NULL;
+	_print(*a, b);
+	if (ft_lstsize(*a) == 2)
+		sa(a);
+	else
+	{
+		b = ft_sort_b(a);
+		a = ft_sort_a(a, &b);
+		i = ft_find_index(*a, ft_min(*a));
+		if (i < ft_lstsize(*a) - i)
+		{
+			while ((*a)->nbr != ft_min(*a))
+				ra(a);
+		}
+		else
+		{
+			while ((*a)->nbr != ft_min(*a))
+				rra(a);
+		}
+	}
+	_print(*a, b);
 }
 
 static void	error_msg(void )
