@@ -2,13 +2,14 @@
 
 int	swap(t_list **stack)
 {
-	int	tmp;
+	t_list	*tmp;
 
 	if (!stack || !*stack || !(*stack)->next)
 		return (0);
-	tmp = (*stack)->nbr;
-	(*stack)->nbr = (*stack)->next->nbr;
-	(*stack)->next->nbr = tmp;
+	tmp = *stack;
+	*stack = (*stack)->next;
+	tmp->next = (*stack)->next;
+	(*stack)->next = tmp;
 	return (1);
 }
 
@@ -117,103 +118,3 @@ void	rrr(t_list **a, t_list **b)
 	rrotate(b);
 	ft_printf("rrr\n");
 }
-
-// void push_all_but_three(t_list **a, t_list **b)
-// {
-// 	int size;
-
-// 	size = ft_lstsize(*a);
-//     while (size > 3)
-// 	{
-// 		do_push(b, a, "pb"); // Push from a to b
-//         size--;
-//     }
-// }
-
-// void find_min_and_push(t_list **a, t_list **b)
-// {
-// 	int min_b;
-// 	int position;
-
-// 	min_b = find_min(*b); // Find the smallest element in stack b
-// 	position = find_position(*b, min_b); // Find its position in stack b
-
-//     // Rotate stack b to bring the smallest element to the top
-// 	if (position <= ft_lstsize(*b) / 2)
-// 	{
-// 		while ((*b)->nbr != min_b)
-// 		{
-// 			do_rotate(b, "rb"); // Rotate b forward
-// 		}
-// 	}
-// 	else
-// 	{
-// 		while ((*b)->nbr != min_b)
-// 		{
-// 			do_rrotate(b, "rrb"); // Rotate b backward
-// 		}
-// 	}
-
-//     // Push the smallest element to stack a
-// 	do_push(a, b, "pa");
-
-//     // Rotate stack a to place the element in the correct position
-// 	if ((*a)->next && (*a)->nbr > (*a)->next->nbr)
-// 	{
-// 		do_swap(a, "sa"); // Swap if necessary
-// 	}
-// }
-
-// void rotate_to_min(t_list **a)
-// {
-// 	int min_a;
-//     int position;
-
-// 	min_a = find_min(*a); // Find the smallest element in stack a
-// 	position = find_position(*a, min_a); // Find its position in stack a
-
-//     // Rotate stack a to bring the smallest element to the top
-// 	if (position <= ft_lstsize(*a) / 2)
-// 	{
-// 		while ((*a)->nbr != min_a)
-// 		{
-// 			do_rotate(a, "ra"); // Rotate a forward
-// 		}
-// 	}
-// 	else
-// 	{
-// 		while ((*a)->nbr != min_a)
-// 		{
-// 			do_rrotate(a, "rra"); // Rotate a backward
-// 		}
-// 	}
-// }
-
-// int	find_position(t_list *stack, int value)
-// {
-// 	int position;
-
-// 	position = 0;
-// 	while (stack)
-// 	{
-// 		if (stack->nbr == value)
-// 			return (position);
-// 		stack = stack->next;
-// 		position++;
-// 	}
-// 	return (-1); // Not found
-// }
-
-// int	find_min(t_list *stack)
-// {
-// 	int min;
-
-// 	min = stack->nbr;
-// 	while (stack)
-// 	{
-// 		if (stack->nbr < min)
-// 			min = stack->nbr;
-//         stack = stack->next;
-//     }
-//     return (min);
-// }

@@ -7,8 +7,7 @@ SRCS_LIBFT:=	ft_isdigit.c ft_strlen.c ft_bzero.c ft_strncmp.c ft_atoi.c ft_putch
 				ft_lstlast.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 
 HEADERS:= libft.h ft_printf.h push_swap.h
-SRCS:= $(SRCS_LIBFT) $(SRCS_PRINTF)  ft_rotate_type.c ft_rotate_and_push.c ft_case_rotation_ab_utils.c ft_case_rotation_ba_utils.c \
-		ft_lstutils.c sort_big.c sort_three.c is_sorted.c push_swap_utils.c push_swap.c
+SRCS:= $(SRCS_LIBFT) $(SRCS_PRINTF) quick_sort.c sort_small.c sort_utils.c stack_indexing.c push_swap_utils.c push_swap.c
 OBJS:=	$(SRCS:.c=.o)
 
 $(NAME): $(OBJS)

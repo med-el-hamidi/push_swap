@@ -6,6 +6,7 @@
 typedef struct s_list {
 	int				nbr;
 	int				index;
+	int				flag;
 	struct s_list	*next;
 }	t_list;
 
@@ -17,7 +18,7 @@ void	ft_putstr_fd(char *s, int fd);
 void    ft_bzero(void *s, size_t n);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 
-t_list	*ft_lstnew(int content);
+t_list	*ft_lstnew(int nbr);
 int		ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
