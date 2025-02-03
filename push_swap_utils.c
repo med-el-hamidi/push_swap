@@ -13,22 +13,20 @@ int	swap(t_list **stack)
 	return (1);
 }
 
-void	sa(t_list **a)
+void	swap_(t_list **stack, char c)
 {
-	if (swap(a))
-		ft_printf("sa\n");
-}
-
-void	sb(t_list **b)
-{
-	if (swap(b))
-		ft_printf("sb\n");
+	if (swap(stack))
+		ft_printf("s%c\n", c);
 }
 
 void	ss(t_list **a, t_list **b)
 {
-	if (swap(a) && swap(b))
-		ft_printf("ss\n");
+	if (!a || !*a || !(*a)->next
+		|| !b || !*b || !(*b)->next)
+		return ;
+	swap(a);
+	swap(b);
+	ft_printf("ss\n");
 }
 
 int	push(t_list **to, t_list **from)
@@ -68,16 +66,10 @@ void rotate(t_list **stack)
 	*stack = ptr;
 }
 
-void	ra(t_list **a)
+void	rotate_(t_list **stack, char c)
 {
-	rotate(a);
-	ft_printf("ra\n");
-}
-
-void	rb(t_list **b)
-{
-	rotate(b);
-	ft_printf("rb\n");
+	rotate(stack);
+	ft_printf("r%c\n", c);
 }
 
 void	rr(t_list **a, t_list **b)
@@ -100,16 +92,10 @@ void rrotate(t_list **stack)
 	ptr->next = NULL;
 }
 
-void	rra(t_list **a)
+void	rrotate_(t_list **stack, char c)
 {
-	rrotate(a);
-	ft_printf("rra\n");
-}
-
-void	rrb(t_list **b)
-{
-	rrotate(b);
-	ft_printf("rrb\n");
+	rrotate(stack);
+	ft_printf("rr%c\n", c);
 }
 
 void	rrr(t_list **a, t_list **b)

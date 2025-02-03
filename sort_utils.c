@@ -23,9 +23,9 @@ void ra_or_rra(t_list **a, int len, int *flag)
 	if (len <= 5)
 	{
 		if (*flag == 1)
-			ra(a);
+			rotate_(a, 'a');
 		else if (*flag == -1)
-			rra(a);
+			rrotate_(a, 'a');
 		else
 		{
 			tmp = *a;
@@ -40,7 +40,7 @@ void ra_or_rra(t_list **a, int len, int *flag)
 				count++;
 				tmp = tmp->next;
 			}
-			if (!(*flag) && count <= (len - 2))
+			if (!(*flag) && count <= (len - 3))
 				*flag = 1;
 			else if (*flag == 2 && count <= 2)
 				*flag = 1;

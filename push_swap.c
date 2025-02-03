@@ -158,11 +158,11 @@ static void sort_stack(t_list **a, int len)
 	b = NULL;
 	_print(*a, b);
 	if (len == 2)
-		sa(a);
+		swap_(a, 'a');
 	else if (len == 3)
 		sort_three(a);
 	else if (len <= 5)
-		sort_45(a, &b, len);
+		sort_4nd5(a, &b, len);
 	else
 		quick_sort(a, &b, len);
 	_print(*a, b);
