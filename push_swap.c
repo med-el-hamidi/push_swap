@@ -3,7 +3,7 @@
 static void	handle_input(int ac, char **av);
 static void	handle_occurence(t_list *a);
 static void	sort_stack(t_list **a, int len);
-static void	error_msg(void );
+static void	error_exit(int e);
 
 static void	_f(void )
 {
@@ -54,14 +54,12 @@ int	main(int argc, char *argv[])
 		if (!node)
 		{
 			ft_lstclear(&a);
-			error_msg();
-			return (EXIT_FAILURE);
+			error_exit(EXIT_FAILURE);
 		}
 		node->index = -1;
 		ft_lstadd_back(&a, node);
 	}
 	handle_occurence(a);
-	_print(a, NULL);
 	if (is_sorted(a))
 		return (EXIT_SUCCESS);
 	stack_indexing(a, argc - 1);
@@ -92,10 +90,7 @@ static void	handle_input(int ac, char **av)
 		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))
-			{
-				error_msg();
-				exit (EXIT_INVALID_INPUT);
-			}
+				error_exit(EXIT_INVALID_INPUT);
 			if (!flag && av[i][j] != '0')
 				flag = 1;
 			if (flag)
@@ -121,10 +116,7 @@ static void	handle_input(int ac, char **av)
 		else
 			is_int = 1;
 		if (!is_int)
-		{
-			error_msg();
-			exit (EXIT_INVALID_INPUT);
-		}
+			error_exit(EXIT_INVALID_INPUT);
 	}
 }
 
@@ -142,8 +134,7 @@ static void	handle_occurence(t_list *a)
 			if (ptr->nbr == ptr_k->nbr)
 			{
 				ft_lstclear(&a);
-				error_msg();
-				exit (EXIT_INVALID_INPUT);
+				error_exit(EXIT_INVALID_INPUT);
 			}
 			ptr_k = ptr_k->next;
 		}
@@ -156,19 +147,18 @@ static void sort_stack(t_list **a, int len)
 	t_list	*b;
 
 	b = NULL;
-	_print(*a, b);
 	if (len == 2)
-		swap_(a, 'a');
+		s_(a, 'a');
 	else if (len == 3)
 		sort_three(a);
 	else if (len <= 5)
 		sort_4nd5(a, &b, len);
 	else
 		quick_sort(a, &b, len);
-	_print(*a, b);
 }
 
-static void	error_msg(void )
+static void	error_exit(int e)
 {
 	ft_printf("Error\n");
+	exit (e);
 }
