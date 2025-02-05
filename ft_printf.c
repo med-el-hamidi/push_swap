@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 
-static void	_ft_print_based_on_format(va_list args, char c);
 static void	_ft_printf(va_list args, const char *str);
 
 int	ft_printf(const char *str, ...)
@@ -14,17 +13,6 @@ int	ft_printf(const char *str, ...)
 	return (ft_output_length_cntl(-2));
 }
 
-static void	_ft_print_based_on_format(va_list args, char c)
-{
-
-	if (c == 'c')
-		ft_putchar_fd(va_arg(args, int), FD);
-	else if (c == 's')
-		ft_putstr_fd(va_arg(args, char *), FD);
-	else if (c)
-		ft_putchar_fd(c, FD);
-}
-
 static void	_ft_printf(va_list args, const char *str)
 {
 	char	*tmp;
@@ -35,7 +23,11 @@ static void	_ft_printf(va_list args, const char *str)
 		if (*tmp == '%')
 		{
             tmp++;
-			_ft_print_based_on_format(args, *tmp);
+			if (*tmp == 'c')
+			{
+				ft_putchar_fd(va_arg(args, int), FD);
+				ft_output_length_cntl(1);
+			}
 			if (ft_check_ifwrite_failed())
 				return ;
 		}

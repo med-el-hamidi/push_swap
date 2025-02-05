@@ -2,7 +2,6 @@
 
 static char	*_three_sorted(t_list **stack_a);
 static void	_sort_2b3a(t_list **stack_a, t_list **stack_b);
-static void	_sort_3b3a(t_list **stack_a, t_list **stack_b);
 
 void	sort_three(t_list **stack_a)
 {
@@ -107,29 +106,6 @@ static char	*_three_sorted(t_list **stack_a)
 }
 
 static void	_sort_2b3a(t_list **stack_a, t_list **stack_b)
-{
-	char	*res;
-
-	res = _three_sorted(stack_a);
-	if (!ft_strncmp(res, "sa\nrra", 7))
-	{
-		ss(stack_a, stack_b);
-		rr_(stack_a, 'a');
-	}
-	else if (!ft_strncmp(res, "sa", 3))
-		ss(stack_a, stack_b);
-	else if (!ft_strncmp(res, "ra", 3))
-		rr(stack_a, stack_b);
-	else if (!ft_strncmp(res, "sa\nra", 6))
-	{
-		ss(stack_a, stack_b);
-		r_(stack_a, 'a');
-	}
-	else if (!ft_strncmp(res, "rra", 4))
-		rrr(stack_a, stack_b);
-}
-
-static void	_sort_3b3a(t_list **stack_a, t_list **stack_b)
 {
 	char	*res;
 
