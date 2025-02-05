@@ -1,6 +1,6 @@
 #!/bin/sh
-ARG=$(shuf -i 0-2147483647 -n 500)  # Generates unique numbers from 0 to 2147483647
-#ARG=$(python3 -c 'import random; print(" ".join(map(str, random.sample(range(-2147483648, 2147483647), 100))))')
+#ARG=$(shuf -i 0-2147483647 -n 100)  # Generates unique numbers from 0 to 2147483647
+ARG=$(python3 -c 'import random; print(" ".join(map(str, random.sample(range(-2147483648, 2147483647), 100))))')
 #ARG=$(seq 2147483647 -1 $((-2147483648)) | head -n 1000)
-#ARG=$(python3 -c 'print(" ".join(map(str, range(2147483647, 2147483647 - 100, -1))))')
+#ARG=$(python3 -c 'print(" ".join(map(str, range(2147483647, 2147483647 - 500, -1))))')
 ./push_swap $ARG | wc -l

@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+static int	count_till_0or1_index(t_list *a, int len);
+
 int	is_sorted(t_list *a)
 {
 	int	min;
@@ -18,7 +20,7 @@ int	is_sorted(t_list *a)
 void	ra_or_rra(t_list **a, int len, int *flag)
 {
 	int		count;
-	t_list	*tmp;
+	t_list	*ptr;
 
 	if (*flag == 1)
 		r_(a, 'a');
@@ -26,17 +28,11 @@ void	ra_or_rra(t_list **a, int len, int *flag)
 		rr_(a, 'a');
 	else
 	{
-		tmp = *a;
-		count = 0;
-		while ((!(*flag) && tmp && tmp->index != 0)
-			|| (*flag == 2 && tmp && tmp->index != 1))
-		{
-			count++;
-			tmp = tmp->next;
-		}
-		if ((!(*flag) && count <= (len - 3)))
+		ptr = *a;
+		count = count_till_0or1_index(ptr, len);
+		if (!(*flag) && count <= 1)
 			*flag = 1;
-		else if (*flag == 2 && count <= ((len / 2) - 1))
+		else if (*flag == 2 && count <= 2)
 			*flag = 1;
 		else
 			*flag = -1;
@@ -44,23 +40,27 @@ void	ra_or_rra(t_list **a, int len, int *flag)
 	}
 }
 
-int	get_max_index(t_list *stack)
+static int	count_till_0or1_index(t_list *a, int len)
 {
-	int	max;
+	int	count;
 
-	max = stack->index;
-	while (stack)
+	count = 0;
+
+	if (len == 4)
 	{
-		if (stack->index > max)
-			max = stack->index;
-		stack = stack->next;
+		while (a && a->index != 0)
+		{
+			count++;
+			a = a->next;
+		}
 	}
-	return (max);
-}
-
-void	track_order(t_order *order)
-{
-	order->max = order->midium;
-	order->midium = (order->max - order->next) / 2 + order->next;
-	order->phase_flag++;
+	else if (len == 5)
+	{
+		while (a && a->index != 0 && a->index != 1)
+		{
+			count++;
+			a = a->next;
+		}
+	}
+	return (count);
 }

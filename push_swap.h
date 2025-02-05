@@ -37,9 +37,9 @@ void	ra_or_rra(t_list **a, int len, int *flag);
 
 void	sort_three(t_list **stack_a);
 void	sort_4nd5(t_list **stack_a, t_list **stack_b, int len);
-void	sort_six(t_list **stack_a, t_list **stack_b);
 void	quick_sort(t_list **stack_a, t_list **stack_b, int len);
 
-int		get_max_index(t_list *stack);
 void	track_order(t_order *order);
+int		get_max_index(t_list *stack);
+//int		*part_by_ra_or_rra(t_list *a, int len);
 #endif

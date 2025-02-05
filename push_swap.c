@@ -5,10 +5,10 @@ static void	handle_occurence(t_list *a);
 static void	sort_stack(t_list **a, int len);
 static void	error_exit(int e);
 
-static void	_f(void )
-{
-	system ("leaks push_swap");
-}
+// static void	_f(void )
+// {
+// 	system ("leaks push_swap");
+// }
 
 void _print(t_list *a, t_list *b)
 {
@@ -65,7 +65,7 @@ int	main(int argc, char *argv[])
 	stack_indexing(a, argc - 1);
 	sort_stack(&a, argc - 1);
 	ft_lstclear(&a);
-	atexit(_f);
+	//atexit(_f);
 	return (EXIT_SUCCESS);
 }
 
@@ -147,6 +147,7 @@ static void sort_stack(t_list **a, int len)
 	t_list	*b;
 
 	b = NULL;
+	//_print(*a, b);
 	if (len == 2)
 		s_(a, 'a');
 	else if (len == 3)
@@ -155,6 +156,7 @@ static void sort_stack(t_list **a, int len)
 		sort_4nd5(a, &b, len);
 	else
 		quick_sort(a, &b, len);
+	//_print(*a, b);
 }
 
 static void	error_exit(int e)

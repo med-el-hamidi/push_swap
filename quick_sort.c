@@ -25,21 +25,37 @@ void	quick_sort(t_list **a, t_list **b, int len)
 
 static void	partition(t_list **a, t_list **b, t_order *order, int len)
 {
-	int	i;
+	int		i;
+	//int		j;
+	//int		*ra_or_rra;
 
 	i = -1;
+	//j = 0;
+	//ra_or_rra = 0;
+	//ra_or_rra = part_by_ra_or_rra(*a, len);
 	while (++i < len)
 	{
 		if ((*a)->index <= order->midium)
 			pb(b, a);
 		else
 		{
-			if (ft_lstsize(*b) > 1 && (*b)->index < (order->midium / 2))
-				rr(a, b);
-			else
-				r_(a, 'a');
+			// if (ra_or_rra && ra_or_rra[j++])
+			// {
+			// 	if (ft_lstsize(*b) > 1 && ft_lstlast(*b)->index > (order->midium / 2))
+			// 		rrr(a, b);
+			// 	else
+			// 		rr_(a, 'a');
+			// }
+			// else
+			// {
+				if (ft_lstsize(*b) > 1 && (*b)->index < (order->midium / 2))
+					rr(a, b);
+				else
+					r_(a, 'a');
+			//}
 		}
 	}
+	//free(ra_or_rra);
 	track_order(order);
 }
 
