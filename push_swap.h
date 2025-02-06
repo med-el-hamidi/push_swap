@@ -15,6 +15,13 @@ typedef struct s_order {
 	int	phase_flag;
 }	t_order;
 
+void	error_exit(int e);
+void	free_argv(char **argv);
+void	free_exit(int e, char **argv, int ac_changed);
+
+char	**handle_input(int *ac, char **av);
+void	handle_occurence(t_list *a);
+
 void	_print(t_list *a, t_list *b);
 int		is_sorted(t_list *a);
 

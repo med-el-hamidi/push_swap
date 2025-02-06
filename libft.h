@@ -17,6 +17,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void    ft_bzero(void *s, size_t n);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	**ft_split(char const *s, char c);
 
 t_list	*ft_lstnew(int nbr);
 int		ft_lstsize(t_list *lst);
