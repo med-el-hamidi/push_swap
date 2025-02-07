@@ -18,15 +18,19 @@ permute() {
 }
 
 # Generate all permutations of the numbers 0 1 2 3 4
-permutations=$(permute 0 1 2 3 4 5)
+permutations=$(permute 0 1 2 3 4 5 6)
 
 # Loop through each permutation and execute ./push_swap
 echo "$permutations" | while read -r perm; do
   # Execute push_swap and checker_linux, and store the result
   res=$(./push_swap $perm | ./checker_linux $perm)
+
+  if [[ "$res" == "OK" ]]; then
+    echo "OK: $perm"
+  fi
   # Check if the result is "KO"
   if [[ "$res" == "KO" ]]; then
-    echo "KO: $perm"
+    echo "KO: $perm <------------------------------"
   fi
 done
 echo "Done."

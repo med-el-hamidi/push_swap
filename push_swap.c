@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 		return (EXIT_SUCCESS);
 	}
 	a = NULL;
-	_fill_stack(&a, argv, ac, old_ac);
+	_fill_stack(&a, argv, ac, (old_ac - ac));
 	if (old_ac != ac || ac == 2)
 		free_argv(argv);
 	else

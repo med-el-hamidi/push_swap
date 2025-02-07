@@ -48,5 +48,6 @@ void	quick_sort(t_list **stack_a, t_list **stack_b, int len);
 
 void	track_order(t_order *order);
 int		get_max_index(t_list *stack);
+int		get_min_index(t_list *stack);
 //int		*part_by_ra_or_rra(t_list *a, int len);
 #endif

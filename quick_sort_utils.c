@@ -10,6 +10,20 @@ void	track_order(t_order *order)
 	order->phase_flag++;
 }
 
+int		get_min_index(t_list *stack)
+{
+	int	min;
+
+	min = stack->index;
+	while (stack)
+	{
+		if (stack->index < min)
+			min = stack->index;
+		stack = stack->next;
+	}
+	return (min);
+}
+
 int	get_max_index(t_list *stack)
 {
 	int	max;
