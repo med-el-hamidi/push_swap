@@ -1,8 +1,8 @@
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_stack	*ft_lstlast(t_stack *lst)
 {
-	t_list	*ptr;
+	t_stack	*ptr;
 
 	if (!lst)
 		return (NULL);

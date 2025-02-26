@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-static void	insert_index(t_list *stack, int min, int i);
-static int	get_min(t_list *stack);
+static void	insert_index(t_stack *stack, int min, int i);
+static int	get_min(t_stack *stack);
 
-void	stack_indexing(t_list *stack, int len)
+void	stack_indexing(t_stack *stack, int ac)
 {
 	int	next_min;
 	int	i;
@@ -11,7 +11,7 @@ void	stack_indexing(t_list *stack, int len)
 	if (!stack)
 		return ;
 	i = 0;
-	while (i < len)
+	while (i < ac)
 	{
 		next_min = get_min(stack);
 		insert_index(stack, next_min, i);
@@ -19,9 +19,9 @@ void	stack_indexing(t_list *stack, int len)
 	}
 }
 
-static void	insert_index(t_list *stack, int min, int i)
+static void	insert_index(t_stack *stack, int min, int i)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
 	tmp = stack;
 	while (tmp)
@@ -33,9 +33,9 @@ static void	insert_index(t_list *stack, int min, int i)
 	tmp->index = i;
 }
 
-static int	get_min(t_list *stack)
+static int	get_min(t_stack *stack)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 	int		min;
 
 	tmp = stack;

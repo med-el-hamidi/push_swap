@@ -44,14 +44,15 @@ static void	ft_free(char **arr, size_t index)
 	free(arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, int *size, char c)
 {
 	char	**res;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	res = (char **)malloc(sizeof(char *) * (ft_cwords(s, c) + 1));
+	*size = ft_cwords(s, c);
+	res = (char **)malloc(sizeof(char *) * (*size + 1));
 	if (!res)
 		return (NULL);
 	i = 0;

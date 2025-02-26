@@ -1,10 +1,10 @@
 #include "libft.h"
 
-t_list	*ft_lstnew(int nbr)
+t_stack	*ft_lstnew(int nbr)
 {
-	t_list	*node;
+	t_stack	*node;
 
-	node = (t_list *)malloc(sizeof(t_list));
+	node = (t_stack *)malloc(sizeof(t_stack));
 	if (!node)
 		return (NULL);
 	node->nbr = nbr;

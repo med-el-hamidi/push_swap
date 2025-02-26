@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-static char	*_three_sorted(t_list **stack_a);
-static void	_sort_2b3a(t_list **stack_a, t_list **stack_b);
+static char	*_three_sorted(t_stack **stack_a);
+static void	_sort_2b3a(t_stack **stack_a, t_stack **stack_b);
 
-void	sort_three(t_list **stack_a)
+void	sort_three(t_stack **stack_a)
 {
 	char	*res;
 
@@ -28,7 +28,7 @@ void	sort_three(t_list **stack_a)
 		s_(stack_a, 'a');
 }
 
-void	sort_4nd5(t_list **stack_a, t_list **stack_b, int len)
+void	sort_4nd5(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	int		i;
 	int		flag;
@@ -37,19 +37,19 @@ void	sort_4nd5(t_list **stack_a, t_list **stack_b, int len)
 	i = -1;
 	flag = 0;
 	f = 0;
-	while (++i < len)
+	while (++i < size)
 	{
-		if ((*stack_a)->index == 0 || (len == 5 && (*stack_a)->index == 1))
+		if ((*stack_a)->index == 0 || (size == 5 && (*stack_a)->index == 1))
 		{
 			f = 2;
 			pb(stack_b, stack_a);
-			if (++flag == (len - 3))
+			if (++flag == (size - 3))
 				break ;
 		}
 		else
-			ra_or_rra(stack_a, len, &f);
+			ra_or_rra(stack_a, size, &f);
 	}
-	if (len == 5 && (*stack_b)->nbr < (*stack_b)->next->nbr)
+	if (size == 5 && (*stack_b)->nbr < (*stack_b)->next->nbr)
 		_sort_2b3a(stack_a, stack_b);
 	else if (!is_sorted(*stack_a))
 		sort_three(stack_a);
@@ -57,11 +57,11 @@ void	sort_4nd5(t_list **stack_a, t_list **stack_b, int len)
 		pa(stack_a, stack_b);
 }
 
-static char	*_three_sorted(t_list **stack_a)
+static char	*_three_sorted(t_stack **stack_a)
 {
-	t_list	*first = *stack_a;
-	t_list	*second = first->next;
-	t_list	*third = second->next;
+	t_stack	*first = *stack_a;
+	t_stack	*second = first->next;
+	t_stack	*third = second->next;
 
 	if (first->nbr > second->nbr && first->nbr > third->nbr)
 	{
@@ -82,7 +82,7 @@ static char	*_three_sorted(t_list **stack_a)
 	return (NULL);
 }
 
-static void	_sort_2b3a(t_list **stack_a, t_list **stack_b)
+static void	_sort_2b3a(t_stack **stack_a, t_stack **stack_b)
 {
 	char	*res;
 

@@ -1,6 +1,8 @@
-#include "ft_printf.h"
+#include "libft.h"
 
 static void	_ft_printf(va_list args, const char *str);
+static int	ft_output_length_cntl(int flag);
+static int	ft_check_ifwrite_failed(void);
 
 int	ft_printf(const char *str, ...)
 {
@@ -10,7 +12,15 @@ int	ft_printf(const char *str, ...)
 	ft_output_length_cntl(0);
 	_ft_printf(args, str);
 	va_end(args);
+	if (ft_output_length_cntl(-2) == -1)
+		exit(EXIT_ERROR_STDIN);
 	return (ft_output_length_cntl(-2));
+}
+
+void	ft_check_bytes_written(int bytes_written)
+{
+	if (bytes_written == -1)
+		ft_output_length_cntl(-1);
 }
 
 static void	_ft_printf(va_list args, const char *str)
@@ -40,4 +50,28 @@ static void	_ft_printf(va_list args, const char *str)
 		}
 		tmp++;
 	}
+}
+
+static int	ft_output_length_cntl(int flag)
+{
+	static int	output_length;
+
+	if (!flag)
+		output_length = 0;
+	else if (flag > 0)
+		output_length += flag;
+	else if (flag == -1)
+		output_length = -1;
+	return (output_length);
+}
+
+static int	ft_check_ifwrite_failed(void)
+{
+	if (ft_output_length_cntl(-2) == -1)
+    {
+        ft_putstr_fd("Error\n", 2);
+        return (1);
+    }
+	else
+		return (0);
 }

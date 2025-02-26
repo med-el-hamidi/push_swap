@@ -3,10 +3,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <stdio.h> //debug
-# include "ft_printf.h"
+# include "libft/libft.h"
 
 # define EXIT_INVALID_INPUT 2
+# define EXIT_NOT_INT 4
+# define EXIT_OCCURENCE 11
 
 typedef struct s_order {
 	int	next;
@@ -15,39 +16,37 @@ typedef struct s_order {
 	int	phase_flag;
 }	t_order;
 
-void	error_exit(int e);
-void	free_argv(char **argv);
-void	free_exit(int e, char **argv, int ac_changed);
+void	_print(t_stack *a, t_stack *b);
 
-char	**handle_input(int *ac, char **av);
-void	handle_occurence(t_list *a);
+void	free_argv(char ***argv);
+void	free_exit(int e, char ***argv);
 
-void	_print(t_list *a, t_list *b);
-int		is_sorted(t_list *a);
+char	***handle_input(int *ac, char **av);
+void	handle_occurence(t_stack *a);
+int		is_sorted(t_stack *a);
 
-int		swap(t_list **stack);
-int		push(t_list **to, t_list **from);
-void	rotate(t_list **stack);
-void	rrotate(t_list **stack);
 
-void	s_(t_list **stack, char c);
-void	ss(t_list **a, t_list **b);
-void	pa(t_list **to_a, t_list **from_b);
-void	pb(t_list **to_b, t_list **from_a);
-void	r_(t_list **stack, char c);
-void	rr(t_list **a, t_list **b);
-void	rr_(t_list **stack, char c);
-void	rrr(t_list **a, t_list **b);
+int		swap(t_stack **stack);
+int		push(t_stack **to, t_stack **from);
+void	rotate(t_stack **stack);
+void	rrotate(t_stack **stack);
 
-void	stack_indexing(t_list *stack, int len);
-void	ra_or_rra(t_list **a, int len, int *flag);
+void	s_(t_stack **stack, char c);
+void	ss(t_stack **a, t_stack **b);
+void	pa(t_stack **to_a, t_stack **from_b);
+void	pb(t_stack **to_b, t_stack **from_a);
+void	r_(t_stack **stack, char c);
+void	rr(t_stack **a, t_stack **b);
+void	rr_(t_stack **stack, char c);
+void	rrr(t_stack **a, t_stack **b);
 
-void	sort_three(t_list **stack_a);
-void	sort_4nd5(t_list **stack_a, t_list **stack_b, int len);
-void	quick_sort(t_list **stack_a, t_list **stack_b, int len);
+void	stack_indexing(t_stack *stack, int ac);
+void	ra_or_rra(t_stack **a, int ac, int *flag);
 
-void	track_order(t_order *order);
-int		get_max_index(t_list *stack);
-int		get_min_index(t_list *stack);
-//int		*part_by_ra_or_rra(t_list *a, int len);
+void	sort_three(t_stack **stack_a);
+void	sort_4nd5(t_stack **stack_a, t_stack **stack_b, int ac);
+void	quick_sort(t_stack **stack_a, t_stack **stack_b, int ac);
+
+int		find_min(t_stack *stack, int i);
+int		find_max(t_stack *stack, int i);
 #endif

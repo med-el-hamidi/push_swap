@@ -1,30 +1,60 @@
-NAME:=push_swap
-CC:=cc
-CFLAGS:= -Wall -Wextra -Werror -fsanitize=address
+NAME := push_swap
+CHECKER := checker
+LIBFT := ./libft/libft.a
+CC := cc
+CFLAGS := -Wall -Wextra -Werror -fsanitize=address
 
-SRCS_PRINTF:= ft_printf.c ft_printf_utils.c
-SRCS_LIBFT:=	ft_isdigit.c ft_strlen.c ft_bzero.c ft_strncmp.c ft_atoi.c ft_putchar_fd.c ft_putstr_fd.c ft_strlcpy.c ft_split.c \
-				ft_lstlast.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstnew.c ft_lstsize.c
-SRCS_PUSH_SWAP := push_swap_utils.c push_swap_error.c stack_indexing.c push_swap_op1.c push_swap_op2.c push_swap_op3.c sort_utils.c quick_sort_utils.c sort_small.c quick_sort.c push_swap.c
 
-HEADERS:= libft.h ft_printf.h push_swap.h
-SRCS:= $(SRCS_LIBFT) $(SRCS_PRINTF) $(SRCS_PUSH_SWAP)
-OBJS:=	$(SRCS:.c=.o)
+HEADER := push_swap.h
+HEADER_BONUS := checker_bonus.h
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+SRCS :=	push_swap_error.c \
+		push_swap_op1.c \
+		push_swap_op2.c \
+		push_swap_op3.c \
+		stack_indexing.c \
+		sort_utils.c \
+		quick_sort.c \
+		sort_small.c \
+		input_utils.c \
+		push_swap.c
+SRCS_BONUS :=	push_swap_error_bonus.c \
+				push_swap_op1_bonus.c \
+				push_swap_op2_bonus.c \
+				checker_utils_bonus.c \
+				input_utils_bonus.c \
+				checker_bonus.c
 
-%.o: %.c $(HEADERS)
+OBJS := $(SRCS:.c=.o)
+OBJS_BONUS := $(SRCS_BONUS:.c=.o)
+
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $@
+
+$(CHECKER): $(OBJS_BONUS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) -L./libft -lft -o $@
+
+$(LIBFT):
+	make -C ./libft
+
+$(OBJS): %.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_BONUS): %.o: %.c $(HEADER_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
+bonus: $(CHECKER)
+
 clean:
-	rm -f $(OBJS)
+	make -C ./libft clean
+	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	make -C ./libft fclean
+	rm -f $(NAME) $(CHECKER)
 
-re:	fclean all
+re:	fclean $(NAME)
 
 .PHONY: clean

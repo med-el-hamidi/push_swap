@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "checker_bonus.h"
 
 void	free_argv(char ***argv)
 {
@@ -23,5 +23,7 @@ void	free_exit(int e, char ***argv)
 	free_argv(argv);
 	if (e > 0)
 		ft_putstr_fd("Error\n", 2);
+	else
+		ft_printf("OK\n");
 	exit (e);
 }

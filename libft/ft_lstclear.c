@@ -1,8 +1,8 @@
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst)
+void	ft_lstclear(t_stack **lst)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
 	if (!lst)
 		return ;
@@ -10,6 +10,7 @@ void	ft_lstclear(t_list **lst)
 	{
 		tmp = (*lst)->next;
 		(*lst)->nbr = 0;
+		(*lst)->index = 0;
 		free(*lst);
 		*lst = tmp;
 	}

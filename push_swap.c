@@ -1,104 +1,66 @@
 #include "push_swap.h"
 
-static void	_fill_stack(t_list **a, char **argv, int ac, int ac_changed);
-static void	_sort_stack(t_list **a, int len);
-
-// static void	_f(void )
-// {
-// 	system ("leaks push_swap");
-// }
+static void	_fill_stack(t_stack **a, char ***argv);
+static void	_push_swap(t_stack **a, int size);
 
 int	main(int ac, char **av)
 {
-	t_list	*a;
-	char	**argv;
-	int		old_ac;
+	t_stack	*a;
+	char	***argv;
 
 	if (ac < 2)
 		return (EXIT_INVALID_INPUT);
-	old_ac = ac;
 	argv = handle_input(&ac, av);
-	if (old_ac != ac && ac == 1)
-	{
-		free_argv(argv);
-		return (EXIT_SUCCESS);
-	}
+	if (ac == 1)
+		free_exit(EXIT_SUCCESS, argv);
 	a = NULL;
-	_fill_stack(&a, argv, ac, (old_ac - ac));
-	if (old_ac != ac || ac == 2)
-		free_argv(argv);
-	else
-		ac--;
+	_fill_stack(&a, argv);
 	handle_occurence(a);
 	if (is_sorted(a))
 		return (EXIT_SUCCESS);
 	stack_indexing(a, ac);
-	_sort_stack(&a, ac);
-	ft_lstclear(&a);
-	//atexit(_f);
+	_push_swap(&a, ac);
 	return (EXIT_SUCCESS);
 }
 
-static void	_fill_stack(t_list **a, char **argv, int ac, int ac_changed)
+static void	_fill_stack(t_stack **a, char ***argv)
 {
-	t_list	*node;
+	t_stack	*node;
 	int		i;
+	int		j;
 
-	if (ac_changed || (!ac_changed && ac == 2))
-		i = -1;
-	else
-		i = 0;
-	while (++i < ac)
+	i = -1;
+	while (argv[++i])
 	{
-		node = ft_lstnew(atoi(argv[i]));
-		if (!node)
+		j = 0;
+		while (argv[i][j])
 		{
-			ft_lstclear(a);
-			free_exit(EXIT_FAILURE, argv, ac_changed);
+			node = ft_lstnew(atoi(argv[i][j++]));
+			if (!node)
+			{
+				ft_lstclear(a);
+				free_exit(EXIT_FAILURE, argv);
+			}
+			node->index = -1;
+			ft_lstadd_back(a, node);
 		}
-		node->index = -1;
-		ft_lstadd_back(a, node);
 	}
+	free_argv(argv);
 }
 
-static void _sort_stack(t_list **a, int len)
+static void _push_swap(t_stack **a, int size)
 {
-	t_list	*b;
+	t_stack	*b;
 
 	b = NULL;
-	//_print(*a, b);
-	if (len == 2)
+	if (size == 2)
 		s_(a, 'a');
-	else if (len == 3)
+	else if (size == 3)
 		sort_three(a);
-	else if (len <= 5)
-		sort_4nd5(a, &b, len);
+	else if (size <= 5)
+		sort_4nd5(a, &b, size);
 	else
-		quick_sort(a, &b, len);
-	//_print(*a, b);
+	 	quick_sort(a, &b, size);
+	ft_lstclear(a);
 }
 
-void _print(t_list *a, t_list *b)
-{
-	printf("%34s	%34s\n", "_____", "_____");
-	while (a || b)
-	{
-		if (a)
-			printf("%11d %22d	", a->index, a->nbr);
-		else
-			printf("%11c %22c	", ' ', ' ');
-
-		if (b)
-			printf("%11d %22d", b->index, b->nbr);
-		else
-			printf("%11c %22c", ' ', ' ');
-		printf("\n");
-		if (a)
-			a = a->next;
-		if (b)
-			b = b->next;
-	}
-	printf("%11s %22s	%11s %22s\n", "_____", "_____", "_____", "_____");
-	printf("%11c %22c	%11c %22c\n", 'i', 'a', 'i', 'b');
-	printf("\n\n\n");
-}
