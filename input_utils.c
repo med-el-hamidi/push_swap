@@ -22,7 +22,7 @@ char	***handle_input(int *ac, char **av)
 			ft_bzero(arg, 12);
 			len = _parse(argv[i][j++], arg);
 			if(len == -1 || !_is_int(arg, len))
-				free_exit(EXIT_INVALID_INPUT, argv);
+				free_exit(EXIT_NOT_INT, argv);
 		}
 	}
 	return (argv);
@@ -42,7 +42,7 @@ void	handle_occurence(t_stack *a)
 			if (ptr->nbr == ptr_k->nbr)
 			{
 				ft_lstclear(&a);
-				free_exit(EXIT_INVALID_INPUT, NULL);
+				free_exit(EXIT_OCCURENCE, NULL);
 			}
 			ptr_k = ptr_k->next;
 		}
@@ -68,8 +68,13 @@ static char	***_get_argv(int *ac, char **av)
 	{
 		arg_size = 0;
 		argv[i] = ft_split(av[i + 1], &arg_size, ' ');
-		if (!argv[i])
-			free_exit(EXIT_FAILURE, argv);
+		if (!argv[i] || !arg_size)
+		{
+			if (!argv[i])
+				free_exit(EXIT_FAILURE, argv);
+			else
+				free_exit(EXIT_INVALID_INPUT, argv);
+		}
 		argc += arg_size;
 	}
 	if (argc == 0)

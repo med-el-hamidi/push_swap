@@ -2,7 +2,7 @@ NAME := push_swap
 CHECKER := checker
 LIBFT := ./libft/libft.a
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror
 
 
 HEADER := push_swap.h

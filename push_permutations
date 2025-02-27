@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Function to generate all permutations of the input array
+permute() {
+  local items=("$@")
+  local len=${#items[@]}
+  if [ $len -le 1 ]; then
+    echo "${items[*]}"
+  else
+    for ((i=0; i<len; i++)); do
+      local first="${items[$i]}"
+      local rest=("${items[@]:0:i}" "${items[@]:i+1}")
+      permute "${rest[@]}" | while read -r subperm; do
+        echo "$first $subperm"
+      done
+    done
+  fi
+}
+
+# Generate all permutations of the numbers 0 1 2 3 4
+permutations=$(permute 0 1 2 3 4)
+
+# Loop through each permutation and execute ./push_swap
+echo "$permutations" | while read -r perm; do
+  # Execute push_swap and checker_linux, and store the result
+  res=$(./push_swap $perm | ./checker_linux $perm)
+
+  # if [[ "$res" == "OK" ]]; then
+  #   echo "OK: $perm"
+  # fi
+  # Check if the result is "KO"
+  n=$(./push_swap $perm | wc -l)
+  echo $perm : $n
+  #if [[ "$n" > "699" ]]; then
+  #  echo "KO: $perm <------------------------------"
+  #fi
+  if [[ "$res" == "KO" ]]; then
+    echo "KO: $perm <------------------------------"
+  fi
+done
+echo "Done."
+
+
+
+#7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99

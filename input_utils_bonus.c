@@ -68,8 +68,14 @@ static char	***_get_argv(int *ac, char **av)
 	{
 		arg_size = 0;
 		argv[i] = ft_split(av[i + 1], &arg_size, ' ');
-		if (!argv[i])
-			free_exit(EXIT_FAILURE, argv);
+		if (!argv[i] || !arg_size)
+		if (!argv[i] || !arg_size)
+		{
+			if (!argv[i])
+				free_exit(EXIT_FAILURE, argv);
+			else
+				free_exit(EXIT_INVALID_INPUT, argv);
+		}
 		argc += arg_size;
 	}
 	if (argc == 0)

@@ -18,8 +18,8 @@ int main(int ac, char **av)
 	a = NULL;
 	_fill_stack(&a, argv);
 	handle_occurence(a);
-	if (is_sorted(a))
-		free_exit (EXIT_SUCCESS, NULL);
+	// if (is_sorted(a))
+	// 	free_exit (EXIT_SUCCESS, NULL);
 	_checker(&a);
 	return (EXIT_SUCCESS);
 }
@@ -59,8 +59,8 @@ static void	_checker(t_stack **a)
 	bytes = 1;
 	while (bytes > 0)
 	{
-		ft_bzero(buffer, 5);
-		bytes = read(1, buffer, 5);
+		ft_bzero(buffer, sizeof(buffer));
+		bytes = read(1, buffer, sizeof(buffer));
 		if (bytes == -1 || !_check_format(buffer))
 		{
 			ft_lstclear(a);
@@ -70,7 +70,7 @@ static void	_checker(t_stack **a)
 			else
 				free_exit (EXIT_WRONG_FORMAT, NULL);
 		}
-		if (buffer[0] == '\n')
+		if (!bytes)
 			break ;
 		node = ft_lstnew_(buffer);
 		if (!node || (node && !node->str))
@@ -102,7 +102,7 @@ static int _check_format(char *buffer)
 		|| !ft_strncmp(buffer, "rrb\n", 5)
 		|| !ft_strncmp(buffer, "rr\n", 4)
 		|| !ft_strncmp(buffer, "rrr\n", 5)
-		|| buffer[0] == '\n')
+		|| buffer[0] == 0)
 		return (1);
 	return (0);
 }

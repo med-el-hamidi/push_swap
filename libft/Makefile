@@ -1,6 +1,6 @@
 NAME := libft.a
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror
 HEADER := libft.h
 SRCS :=	ft_isdigit.c \
 		ft_atoi.c \
