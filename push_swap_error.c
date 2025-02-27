@@ -1,21 +1,21 @@
 #include "push_swap.h"
 
+#include <stdlib.h>
+
 void	free_argv(char ***argv)
 {
 	int	i;
-	int	j;
 
-	if (!argv)
+	if (!argv || !*argv)
 		return ;
 	i = 0;
-	while (argv[i])
+	while ((*argv)[i])
 	{
-		j = 0;
-		while (argv[i][j])
-			free(argv[i][j++]);
-		free(argv[i++]);
+		free((*argv)[i]);
+		i++;
 	}
-	free(argv);
+	free(*argv);
+	*argv = NULL;
 }
 
 void	free_exit(int e, char ***argv)

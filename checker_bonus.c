@@ -1,9 +1,9 @@
 #include "checker_bonus.h"
 
 static void	_fill_stack(t_stack **a, char ***argv);
-static void _checker(t_stack **a);
-static int _check_format(char *buffer);
-static int _check_order(t_stack **a, t_instruct *ins);
+static void	_checker(t_stack **a);
+static int	_check_format(char *buffer);
+static int	_check_order(t_stack **a, t_instruct *ins);
 
 int main(int ac, char **av)
 {
@@ -13,13 +13,9 @@ int main(int ac, char **av)
 	if (ac < 2)
 		return (EXIT_INVALID_INPUT);
 	argv = handle_input(&ac, av);
-	if (ac == 1)
-		free_exit(EXIT_SUCCESS, argv);
 	a = NULL;
 	_fill_stack(&a, argv);
 	handle_occurence(a);
-	// if (is_sorted(a))
-	// 	free_exit (EXIT_SUCCESS, NULL);
 	_checker(&a);
 	return (EXIT_SUCCESS);
 }

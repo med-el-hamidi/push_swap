@@ -57,12 +57,11 @@ static char	***_get_argv(int *ac, char **av)
 	int		argc;
 	int		i;
 
-	argc = 0;
-	(*ac)--;
-	argv = malloc((*ac + 1) * sizeof(char **));
+	argv = malloc(*ac * sizeof(char **));
 	if (!argv)
 		exit (EXIT_FAILURE);
-	argv[*ac] = NULL;
+	argv[--(*ac)] = NULL;
+	argc = 0;
 	i = -1;
 	while (++i < *ac)
 	{
@@ -77,8 +76,6 @@ static char	***_get_argv(int *ac, char **av)
 		}
 		argc += arg_size;
 	}
-	if (argc == 0)
-		free_exit(EXIT_INVALID_INPUT, argv);
 	*ac = argc;
 	return (argv);
 }
