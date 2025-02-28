@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:34:58 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:34:59 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHECKER_BONUS_H
 # define CHECKER_BONUS_H
 # include <unistd.h>
@@ -16,23 +28,26 @@ typedef struct s_instruct
 	struct s_instruct	*next;
 }	t_instruct;
 
-void	free_argv(char ***argv);
-void	free_exit(int e, char ***argv);
+void		free_argv(char ***argv);
+void		free_exit(int e, char ***argv);
+void		freelsts_exit(int e, t_stack **a, t_instruct **ins);
 
-char	***handle_input(int *ac, char **av);
-void	handle_occurence(t_stack *a);
-int		is_sorted(t_stack *a);
+char		***handle_input(int *ac, char **av);
+void		handle_occurence(t_stack *a);
+int			is_sorted(t_stack *a);
 
-int		swap(t_stack **stack);
-int		push(t_stack **to, t_stack **from);
-void	rotate(t_stack **stack);
-void	rrotate(t_stack **stack);
+int			swap(t_stack **stack);
+int			push(t_stack **to, t_stack **from);
+void		rotate(t_stack **stack);
+void		rrotate(t_stack **stack);
 
-void	ss(t_stack **a, t_stack **b);
-void	rr(t_stack **a, t_stack **b);
-void	rrr(t_stack **a, t_stack **b);
+void		ss(t_stack **a, t_stack **b);
+void		rr(t_stack **a, t_stack **b);
+void		rrr(t_stack **a, t_stack **b);
 
 t_instruct	*ft_lstnew_(char *str);
 void		ft_lstadd_back_(t_instruct **lst, t_instruct *new);
 void		ft_lstclear_(t_instruct **lst);
+
+void		output(t_stack **a, t_instruct *ins);
 #endif

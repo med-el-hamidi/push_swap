@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_op1_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:36:16 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:36:23 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker_bonus.h"
 
 int	swap(t_stack **stack)
@@ -15,7 +27,7 @@ int	swap(t_stack **stack)
 
 int	push(t_stack **to, t_stack **from)
 {
-	t_stack *ptr;
+	t_stack	*ptr;
 
 	if (!from || !*from)
 		return (0);
@@ -26,7 +38,7 @@ int	push(t_stack **to, t_stack **from)
 	return (1);
 }
 
-void rotate(t_stack **stack)
+void	rotate(t_stack **stack)
 {
 	t_stack	*ptr;
 
@@ -38,7 +50,7 @@ void rotate(t_stack **stack)
 	*stack = ptr;
 }
 
-void rrotate(t_stack **stack)
+void	rrotate(t_stack **stack)
 {
 	t_stack	*ptr;
 

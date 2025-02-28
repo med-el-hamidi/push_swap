@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:39:06 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:39:07 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static void	_ft_printf(va_list args, const char *str);
@@ -32,7 +44,7 @@ static void	_ft_printf(va_list args, const char *str)
 	{
 		if (*tmp == '%')
 		{
-            tmp++;
+			tmp++;
 			if (*tmp == 'c')
 			{
 				ft_putchar_fd(va_arg(args, int), FD);
@@ -68,10 +80,10 @@ static int	ft_output_length_cntl(int flag)
 static int	ft_check_ifwrite_failed(void)
 {
 	if (ft_output_length_cntl(-2) == -1)
-    {
-        ft_putstr_fd("Error\n", 2);
-        return (1);
-    }
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (1);
+	}
 	else
 		return (0);
 }

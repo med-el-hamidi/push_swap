@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:34:29 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:34:33 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	_fill_stack(t_stack **a, char ***argv);
@@ -9,7 +21,7 @@ int	main(int ac, char **av)
 	char	***argv;
 
 	if (ac < 2)
-		return (EXIT_INVALID_INPUT);
+		return (EXIT_SUCCESS);
 	argv = handle_input(&ac, av);
 	if (ac == 1)
 		free_exit(EXIT_SUCCESS, argv);
@@ -48,7 +60,7 @@ static void	_fill_stack(t_stack **a, char ***argv)
 	free_argv(argv);
 }
 
-static void _push_swap(t_stack **a, int size)
+static void	_push_swap(t_stack **a, int size)
 {
 	t_stack	*b;
 
@@ -60,7 +72,6 @@ static void _push_swap(t_stack **a, int size)
 	else if (size <= 5)
 		sort_4nd5(a, &b, size);
 	else
-	 	quick_sort(a, &b, size);
+		quick_sort(a, &b, size);
 	ft_lstclear(a);
 }
-

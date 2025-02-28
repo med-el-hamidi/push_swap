@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:34:45 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:34:49 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker_bonus.h"
 
 static void	_fill_stack(t_stack **a, char ***argv);
 static void	_checker(t_stack **a);
 static int	_check_format(char *buffer);
-static int	_check_order(t_stack **a, t_instruct *ins);
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_stack	*a;
 	char	***argv;
 
 	if (ac < 2)
-		return (EXIT_INVALID_INPUT);
+		return (EXIT_SUCCESS);
 	argv = handle_input(&ac, av);
 	a = NULL;
 	_fill_stack(&a, argv);
@@ -57,35 +68,22 @@ static void	_checker(t_stack **a)
 	{
 		ft_bzero(buffer, sizeof(buffer));
 		bytes = read(1, buffer, sizeof(buffer));
-		if (bytes == -1 || !_check_format(buffer))
-		{
-			ft_lstclear(a);
-			ft_lstclear_(&ins);
-			if (bytes == -1)
-				free_exit (EXIT_FAILURE_READ, NULL);
-			else
-				free_exit (EXIT_WRONG_FORMAT, NULL);
-		}
-		if (!bytes)
+		if (bytes == -1)
+			freelsts_exit(EXIT_FAILURE_READ, a, &ins);
+		else if (!_check_format(buffer))
+			freelsts_exit(EXIT_WRONG_FORMAT, a, &ins);
+		else if (!bytes)
 			break ;
 		node = ft_lstnew_(buffer);
 		if (!node || (node && !node->str))
-		{
-			ft_lstclear(a);
-			ft_lstclear_(&ins);
-			free_exit (EXIT_FAILURE, NULL);
-		}
+			freelsts_exit(EXIT_FAILURE, a, &ins);
 		ft_lstadd_back_(&ins, node);
 	}
-	if (_check_order(a, ins))
-		ft_printf("OK\n");
-	else
-		ft_printf("KO\n");
-	ft_lstclear(a);
-	ft_lstclear_(&ins);
+	output(a, ins);
+	freelsts_exit(EXIT_SUCCESS, a, &ins);
 }
 
-static int _check_format(char *buffer)
+static int	_check_format(char *buffer)
 {
 	if (!ft_strncmp(buffer, "pa\n", 4)
 		|| !ft_strncmp(buffer, "pb\n", 4)
@@ -101,45 +99,4 @@ static int _check_format(char *buffer)
 		|| buffer[0] == 0)
 		return (1);
 	return (0);
-}
-
-static int _check_order(t_stack **a, t_instruct *ins)
-{
-	t_stack		*b;
-	t_instruct	*ptr;
-
-	b = NULL;
-	ptr = ins;
-	while (ptr)
-	{
-		if (!ft_strncmp(ptr->str, "pa\n", 4))
-			push(a, &b);
-		else if (!ft_strncmp(ptr->str, "pb\n", 4))
-			push(&b, a);
-		else if (!ft_strncmp(ptr->str, "sa\n", 4))
-			swap(a);
-		else if (!ft_strncmp(ptr->str, "sb\n", 4))
-			swap(&b);
-		else if (!ft_strncmp(ptr->str, "ss\n", 4))
-			ss(a, &b);
-		else if (!ft_strncmp(ptr->str, "ra\n", 4))
-			rotate(a);
-		else if (!ft_strncmp(ptr->str, "rb\n", 4))
-			rotate(&b);
-		else if (!ft_strncmp(ptr->str, "rra\n", 5))
-			rrotate(a);
-		else if (!ft_strncmp(ptr->str, "rrb\n", 5))
-			rrotate(&b);
-		else if (!ft_strncmp(ptr->str, "rr\n", 4))
-			rr(a, &b);
-		else if (!ft_strncmp(ptr->str, "rrr\n", 5))
-			rrr(a, &b);
-		ptr = ptr->next;
-	}
-	if (b)
-	{
-		ft_lstclear(&b);
-		return (0);
-	}
-	return (is_sorted(*a));
 }

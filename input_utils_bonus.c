@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_utils_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:35:25 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:35:26 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker_bonus.h"
 
 static char	***_get_argv(int *ac, char **av);
-static int	_parse(char *str, char *arg);
+static int	_parse(char *str, char *arg, int *len);
 static int	_is_int(char *arg, int len);
 
 char	***handle_input(int *ac, char **av)
@@ -20,8 +32,9 @@ char	***handle_input(int *ac, char **av)
 		while (argv[i][j])
 		{
 			ft_bzero(arg, 12);
-			len = _parse(argv[i][j++], arg);
-			if(len == -1 || !_is_int(arg, len))
+			len = 0;
+			len = _parse(argv[i][j++], arg, &len);
+			if (len == -1 || !_is_int(arg, len))
 				free_exit(EXIT_NOT_INT, argv);
 		}
 	}
@@ -67,30 +80,25 @@ static char	***_get_argv(int *ac, char **av)
 	{
 		arg_size = 0;
 		argv[i] = ft_split(av[i + 1], &arg_size, ' ');
-		if (!argv[i] || !arg_size)
-		{
-			if (!argv[i])
-				free_exit(EXIT_FAILURE, argv);
-			else
-				free_exit(EXIT_INVALID_INPUT, argv);
-		}
+		if (!argv[i])
+			free_exit(EXIT_FAILURE, argv);
+		else if (!arg_size)
+			free_exit(EXIT_INVALID_INPUT, argv);
 		argc += arg_size;
 	}
 	*ac = argc;
 	return (argv);
 }
 
-static int _parse(char *str, char *arg)
+static int	_parse(char *str, char *arg, int *len)
 {
 	int	k;
-	int	len;
-	int flag;
+	int	flag;
 
 	k = 0;
-	len = 0;
 	flag = 0;
 	if (str[k] == '-' || str[k] == '+')
-		arg[len++] = str[k++];
+		arg[(*len)++] = str[k++];
 	while (str[k])
 	{
 		if (!ft_isdigit(str[k]))
@@ -99,15 +107,15 @@ static int _parse(char *str, char *arg)
 			flag = 1;
 		if (flag)
 		{
-			arg[len++] = str[k];
-			if (len > 11)
+			arg[(*len)++] = str[k];
+			if ((*len) > 11)
 				break ;
 		}
 		k++;
 	}
 	if (!flag && str[k - 1] == '0')
-		arg[len] = '0';
-	return (len);
+		arg[(*len)] = '0';
+	return (*len);
 }
 
 static int	_is_int(char *arg, int len)
@@ -130,4 +138,3 @@ static int	_is_int(char *arg, int len)
 		ans = 1;
 	return (ans);
 }
-

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_small.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:37:31 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:37:33 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static char	*_three_sorted(t_stack **stack_a);
@@ -59,10 +71,13 @@ void	sort_4nd5(t_stack **stack_a, t_stack **stack_b, int size)
 
 static char	*_three_sorted(t_stack **stack_a)
 {
-	t_stack	*first = *stack_a;
-	t_stack	*second = first->next;
-	t_stack	*third = second->next;
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*third;
 
+	first = *stack_a;
+	second = first->next;
+	third = second->next;
 	if (first->nbr > second->nbr && first->nbr > third->nbr)
 	{
 		if (second->nbr < third->nbr)

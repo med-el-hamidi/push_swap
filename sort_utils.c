@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:37:39 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:37:41 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	count_till_0or1_index(t_stack *a, int size);
@@ -45,7 +57,6 @@ static int	count_till_0or1_index(t_stack *a, int size)
 	int	count;
 
 	count = 0;
-
 	if (size == 4)
 	{
 		while (a && a->index != 0)
@@ -65,32 +76,7 @@ static int	count_till_0or1_index(t_stack *a, int size)
 	return (count);
 }
 
-int	find_min(t_stack *stack, int i)
-{
-	int		min;
-	int		pos;
-	t_stack	*ptr;
-
-	pos = 0;
-	min = stack->nbr;
-	ptr = stack;
-	while (stack)
-	{
-		if (stack->nbr < min)
-			min = stack->nbr;
-		stack = stack->next;
-	}
-	while (ptr->nbr != min)
-	{
-		ptr = ptr->next;
-		pos++;
-	}
-	if (i)
-		return (pos);
-	return (min);
-}
-
-int	find_max(t_stack *stack, int i)
+int	find_pos_of_max(t_stack *stack)
 {
 	int		max;
 	int		pos;
@@ -110,7 +96,5 @@ int	find_max(t_stack *stack, int i)
 		ptr = ptr->next;
 		pos++;
 	}
-	if (i)
-		return (pos);
-	return (max);
+	return (pos);
 }

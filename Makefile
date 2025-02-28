@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/27 12:40:49 by mel-hami          #+#    #+#              #
+#    Updated: 2025/02/27 12:40:56 by mel-hami         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME := push_swap
 CHECKER := checker
 LIBFT := ./libft/libft.a
@@ -21,7 +33,8 @@ SRCS :=	push_swap_error.c \
 SRCS_BONUS :=	push_swap_error_bonus.c \
 				push_swap_op1_bonus.c \
 				push_swap_op2_bonus.c \
-				checker_utils_bonus.c \
+				checker_utils1_bonus.c \
+				checker_utils2_bonus.c \
 				input_utils_bonus.c \
 				checker_bonus.c
 

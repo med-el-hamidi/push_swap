@@ -1,6 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hami <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 12:39:37 by mel-hami          #+#    #+#             */
+/*   Updated: 2025/02/27 12:39:39 by mel-hami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t	ft_cwords(char const *s, char c)
+static size_t	ft_cwords(char const *s, int *size, char c);
+static size_t	ft_sublen(char const *s, char c);
+static void		ft_free(char **arr, size_t index);
+
+char	**ft_split(char const *s, int *size, char c)
+{
+	char	**res;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	res = (char **)malloc(sizeof(char *) * (ft_cwords(s, size, c) + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			res[i] = (char *)malloc(sizeof(char) * (ft_sublen(s, c) + 1));
+			if (!res[i])
+				return (ft_free(res, i), NULL);
+			ft_strlcpy(res[i], s, (ft_sublen(s, c) + 1));
+			i++;
+			s += ft_sublen(s, c);
+		}
+		else
+			s++;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+static size_t	ft_cwords(char const *s, int *size, char c)
 {
 	size_t	words;
 	int		flag;
@@ -18,6 +63,7 @@ static size_t	ft_cwords(char const *s, char c)
 			flag = 0;
 		s++;
 	}
+	*size = words;
 	return (words);
 }
 
@@ -42,34 +88,4 @@ static void	ft_free(char **arr, size_t index)
 		i++;
 	}
 	free(arr);
-}
-
-char	**ft_split(char const *s, int *size, char c)
-{
-	char	**res;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	*size = ft_cwords(s, c);
-	res = (char **)malloc(sizeof(char *) * (*size + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		if (*s != c)
-		{
-			res[i] = (char *)malloc(sizeof(char) * (ft_sublen(s, c) + 1));
-			if (!res[i])
-				return (ft_free(res, i), NULL);
-			ft_strlcpy(res[i], s, (ft_sublen(s, c) + 1));
-			i++;
-			s += ft_sublen(s, c);
-		}
-		else
-			s++;
-	}
-	res[i] = NULL;
-	return (res);
 }
