@@ -15,9 +15,9 @@ This implementation is based on the **Chack algorithm**, an optimized method for
 
 ## Sorting Efficiency
 
-- 🔢 **3 numbers** → **Sorted in at most 2 moves**.  
-- 🔢 **4 numbers** → **Sorted in at most 6 moves** (but can be done in 1 move for cases like `3 2 0 1`).  
-- 🔢 **5 numbers** → **Sorted in at most 9 moves**.  
+- 🔢 **3 numbers** → **Sorted in at most 2 moves**.
+- 🔢 **4 numbers** → **Sorted in at most 6 moves** (Actually ONE case requires 6 moves --> `3 2 0 1`).  
+- 🔢 **5 numbers** → **Sorted in at most 9 moves**.
 - 🔢 **100 random numbers** → **Sorted in less than 700 moves**.  
 - 🔢 **500 random numbers** → **Sorted in less than 5500 moves**.  
 
