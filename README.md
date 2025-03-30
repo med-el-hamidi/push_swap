@@ -36,7 +36,7 @@ make && make bonus
 ```sh
 ./push_swap "4 67 3 87 23"
 ```
-# Test with checker
+## Test with checker
 ```sh
 ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
 ```
