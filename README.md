@@ -46,3 +46,5 @@ ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
 ❌ If incorrect, it outputs "KO".
 
 ⚠️ If there are duplicates, non-integer values, or invalid instructions, it outputs "Error".
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/med-el-hamidi/push_swap/blob/main/LICENSE.md)
