@@ -13,6 +13,14 @@ This implementation is based on the **Chack algorithm**, an optimized method for
 - Includes a **bonus checker** to verify the correctness of the sorting.
 - Optimized to use a minimal number of operations.
 
+## Sorting Efficiency
+
+- 🔢 **3 numbers** → **Sorted in at most 2 moves**.  
+- 🔢 **4 numbers** → **Sorted in at most 6 moves** (but can be done in 1 move for cases like `3 2 0 1`).  
+- 🔢 **5 numbers** → **Sorted in at most 9 moves**.  
+- 🔢 **100 random numbers** → **Sorted in less than 700 moves**.  
+- 🔢 **500 random numbers** → **Sorted in less than 5500 moves**.  
+
 ## Operations
 
 - `sa` / `sb` / `ss` – Swap top two elements of stack A/B/both.
