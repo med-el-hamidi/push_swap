@@ -1,6 +1,6 @@
 # Push_swap
 
-Push_swap is a sorting algorithm project from [1337 School](https://1337.ma). The goal is to sort a stack of integers using two stacks (`A` and `B`) with a limited set of operations, aiming for the most efficient solution.
+Push_swap is a sorting algorithm project from **1337 School**. The goal is to sort a stack of integers using two stacks (`A` and `B`) with a limited set of operations, aiming for the most efficient solution.
 
 ## Algorithm Used
 
