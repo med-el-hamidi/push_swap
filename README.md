@@ -1,6 +1,7 @@
 # Push_swap
 
 Push_swap is a sorting algorithm project from **1337 School**. The goal is to sort a stack of integers using two stacks (`A` and `B`) with a limited set of operations, aiming for the most efficient solution.
+
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/med-el-hamidi/push_swap/blob/main/LICENSE.md)
 ## Algorithm Used
 
